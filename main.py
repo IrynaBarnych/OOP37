@@ -1,44 +1,36 @@
+"""Завдання 3
+Маємо певний словник з логінами і паролями користувачів.
+Логін використовується як ключ, пароль —
+як значення. Реалізуйте: додавання, видалення, пошук,
+редагування, збереження та завантаження даних
+(використовуючи стиснення та розпакування)."""
 import pickle
-#створення об'єкту для серелізації
-data = {"name": "Valera", "age": 30, "city": "New York"}
-# сералізація об'єкта в байтовий потік
-serialized_data = pickle.dumps(data) #перегляд
-print(serialized_data)
-# через контекстний менеджер
-with open("serialized_data.pickle", "wb") as file:
-    pickle.dump(data, file)
-
-
-#десеріалізація
-deserialized_data = pickle.loads(serialized_data)
-print(deserialized_data)
-# через контекстний менеджер
-with open("serialized_data.pickle", "rb") as file:
-    deserialized_data_file = pickle.load(file)
-print(deserialized_data_file)
-
-### приклад стиснення інформації
 import gzip
-with gzip.open('compressed_file.gz', "wb") as file:
-    file.write(b"some text")
-
-#  ще один з видів стискання
-data = b"some text"
-compressed_data = gzip.compress(data)
-print(compressed_data)
-
-# розпакування стиснених даних
-decompressed_data = gzip.decompress(compressed_data)
-print(decompressed_data)
-
-#розпакування з файлу
-with gzip.open('compressed_file.gz', "rb") as file:
-    new_data = file.read()
-print(new_data)
-
-
-from zipfile import ZipFile
-with ZipFile('metanit.zip', "a") as myzip:
-    myzip.write("eggs.txt")
-    myzip.write("serialized_data.pickle")
+user_credentials = {}
+#збереження
+def save_data():
+    global user_credentials
+    with gzip.open("credentials.pickle.gz", "wb") as file:
+        pickle.dump(user_credentials, file, protocol=pickle.HIGHEST_PROTOCOL)
+    print("Дані збережено!")
+#завантаження даних
+def load_data():
+    global user_credentials
+    try:
+        with gzip.open("credentials.pickle.gz", "rb") as file:
+           user_credentials = pickle.load(file)
+        print("Дані завантажено!")
+    except FileNotFoundError:
+        print("Файл не знайдено.")
+#додавання
+def add_user():
+    global user_credentials
+    login = input("Введіть логін: ")
+    password = input("Введіть пароль: ")
+    user_credentials[login] = password
+    print("Користувача додано")
+add_user()
+save_data()
+load_data()
+print(user_credentials)
 
