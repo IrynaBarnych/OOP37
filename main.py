@@ -108,6 +108,41 @@ def edit_capital():
     else:
         print(f"{country} не знайдено в словнику.")
 
+
+
+def menu():
+    while True:
+        print("\nМеню:")
+        print("1. Додати країну та столицю")
+        print("2. Видалити країну та столицю")
+        print("3. Пошук столиці за назвою країни")
+        print("4. Редагувати столицю за назвою країни")
+        print("5. Зберегти дані")
+        print("6. Завантажити дані")
+        print("7. Вийти")
+
+        choice = input("Виберіть опцію (1-7): ")
+
+        if choice == "1":
+            add_country()
+        elif choice == "2":
+            remove_country()
+        elif choice == "3":
+            search_capital()
+        elif choice == "4":
+            edit_capital()
+        elif choice == "5":
+            save_data()
+        elif choice == "6":
+            load_data()
+        elif choice == "7":
+            break
+        else:
+            print("Некоректний вибір. Спробуйте ще раз.")
+
+# Приклад використання:
+menu()
+
 # Приклад використання функцій:
 add_country()
 save_data()
