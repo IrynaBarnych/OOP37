@@ -29,8 +29,34 @@ def add_user():
     password = input("Введіть пароль: ")
     user_credentials[login] = password
     print("Користувача додано")
+# Видалення користувача
+def remove_user():
+    global user_credentials
+    login_to_remove = input("Введіть логін користувача, якого потрібно видалити: ")
+    if login_to_remove in user_credentials:
+        del user_credentials[login_to_remove]
+        print(f"Користувача з логіном {login_to_remove} видалено.")
+    else:
+        print(f"Користувача з логіном {login_to_remove} не знайдено.")
+
+# Додавання користувача
 add_user()
+
+# Збереження даних
 save_data()
+
+# Завантаження даних
 load_data()
+
+# Видалення користувача
+remove_user()
+
+# Пошук користувача
+find_user()
+
+# Редагування паролю користувача
+edit_password()
+
+# Виведення збережених користувачів
 print(user_credentials)
 
