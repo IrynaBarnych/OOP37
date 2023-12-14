@@ -39,6 +39,15 @@ def remove_user():
     else:
         print(f"Користувача з логіном {login_to_remove} не знайдено.")
 
+# Пошук користувача
+def find_user():
+    global user_credentials
+    login_to_find = input("Введіть логін користувача, якого потрібно знайти: ")
+    if login_to_find in user_credentials:
+        print(f"Користувач з логіном {login_to_find} знайдено. Пароль: {user_credentials[login_to_find]}")
+    else:
+        print(f"Користувача з логіном {login_to_find} не знайдено.")
+
 # Додавання користувача
 add_user()
 
