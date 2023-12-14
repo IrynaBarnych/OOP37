@@ -1,122 +1,114 @@
-# Завдання 1
-# Маємо певний словник з назвами країн і столиць. Назва
-# країни використовується як ключ, назва столиці — як значення.
-# Реалізуйте: додавання, видалення, пошук, редагування,
-# збереження та завантаження даних (використовуючи стиснення та розпакування).
+# Завдання 2
+# Маємо певний словник з назвами музичних груп (виконавців) та альбомів.
+# Назва групи використовується як ключ,
+# назва альбомів — як значення. Реалізуйте: додавання, видалення, пошук, редагування,
+# збереження та завантаження
+# даних (використовуючи стиснення та розпакування).
 
 
 import pickle
 import gzip
 
-countries_capitals = {
-    'Австрія': 'Відень',
-    'Албанія': 'Тирана',
-    'Андорра': 'Андорра-ла-Велья',
-    'Бельгія': 'Брюссель',
-    'Болгарія': 'Софія',
-    'Боснія і Герцеговина': 'Сараєво',
-    'Ватикан': 'Ватикан',
-    'Велика Британія': 'Лондон',
-    'Греція': 'Афіни',
-    'Данія': 'Копенгаген',
-    'Естонія': 'Таллінн',
-    'Ірландія': 'Дублін',
-    'Ісландія': 'Рейк\'явік',
-    'Іспанія': 'Мадрид',
-    'Італія': 'Рим',
-    'Косово': 'Приштина',
-    'Латвія': 'Рига',
-    'Литва': 'Вільнюс',
-    'Ліхтенштейн': 'Вадуц',
-    'Люксембург': 'Люксембург',
-    'Мальта': 'Валлетта',
-    'Молдова': 'Кишинів',
-    'Німеччина': 'Берлін',
-    'Норвегія': 'Осло',
-    'Північна Македонія': 'Скоп\'є',
-    'Польща': 'Варшава',
-    'Португалія': 'Лісабон',
-    'Румунія': 'Бухарест',
-    'Сан-Марино': 'Сан-Марино',
-    'Сербія': 'Белград',
-    'Словаччина': 'Братислава',
-    'Словенія': 'Любляна',
-    'Угорщина': 'Будапешт',
-    'Україна': 'Київ',
-    'Фінляндія': 'Гельсінкі',
-    'Франція': 'Париж',
-    'Хорватія': 'Загреб',
-    'Чехія': 'Прага',
-    'Чорногорія': 'Подгориця',
-    'Швейцарія': 'Берн',
-    'Швеція': 'Стокгольм'
+music_groups_albums = {
+    'The Beatles': 'Abbey Road',
+    'Queen': 'A Night at the Opera',
+    'Led Zeppelin': 'IV',
+    'Pink Floyd': 'The Dark Side of the Moon',
+    'Metallica': 'Metallica',
+    'U2': 'The Joshua Tree',
+    'Nirvana': 'Nevermind',
+    'Coldplay': 'A Rush of Blood to the Head',
+    'Radiohead': 'OK Computer',
+    'Foo Fighters': 'The Colour and the Shape'
 }
 
-# Збереження даних
+
 def save_data():
-    global countries_capitals
-    with gzip.open("countries_capitals.pickle.gz", "wb") as file:
-        pickle.dump(countries_capitals, file, protocol=pickle.HIGHEST_PROTOCOL)
+    global music_groups_albums
+    with gzip.open("music_groups_albums.pickle.gz", "wb") as file:
+        pickle.dump(music_groups_albums, file, protocol=pickle.HIGHEST_PROTOCOL)
     print("Дані збережено!")
 
-# Завантаження даних
 def load_data():
-    global countries_capitals
+    global music_groups_albums
     try:
-        with gzip.open("countries_capitals.pickle.gz", "rb") as file:
-            countries_capitals = pickle.load(file)
+        with gzip.open("music_groups_albums.pickle.gz", "rb") as file:
+            music_groups_albums = pickle.load(file)
         print("Дані завантажено!")
     except FileNotFoundError:
         print("Файл не знайдено.")
 
-# Додавання країни і столиці
-def add_country():
-    global countries_capitals
-    country = input("Введіть назву країни: ")
-    capital = input("Введіть назву столиці: ")
-    countries_capitals[country] = capital
-    print(f"{country} та її столицю {capital} додано.")
 
-# Видалення країни і столиці
-def remove_country():
-    global countries_capitals
-    country = input("Введіть назву країни для видалення: ")
-    if country in countries_capitals:
-        del countries_capitals[country]
-        print(f"{country} видалено.")
-    else:
-        print(f"{country} не знайдено в словнику.")
+def add_group():
+    global music_groups_albums
+    group = input("Введіть назву музичної групи: ")
+    album = input("Введіть назву альбому: ")
+    music_groups_albums[group] = album
+    print(f"{group} та їх альбом {album} додано.")
 
-# Пошук столиці за назвою країни
-def search_capital():
-    global countries_capitals
-    country = input("Введіть назву країни для пошуку столиці: ")
-    capital = countries_capitals.get(country)
-    if capital:
-        print(f"Столиця {country}: {capital}")
-    else:
-        print(f"{country} не знайдено в словнику.")
 
-# Редагування столиці за назвою країни
-def edit_capital():
-    global countries_capitals
-    country = input("Введіть назву країни для редагування столиці: ")
-    if country in countries_capitals:
-        new_capital = input(f"Введіть нову столицю для {country}: ")
-        countries_capitals[country] = new_capital
-        print(f"Столицю {country} змінено на {new_capital}.")
+def remove_group():
+    global music_groups_albums
+    group = input("Введіть назву музичної групи для видалення: ")
+    if group in music_groups_albums:
+        del music_groups_albums[group]
+        print(f"{group} видалено.")
     else:
-        print(f"{country} не знайдено в словнику.")
+        print(f"{group} не знайдено в словнику.")
+
+
+def search_album():
+    global music_groups_albums
+    group = input("Введіть назву музичної групи для пошуку альбому: ")
+    album = music_groups_albums.get(group)
+    if album:
+        print(f"Альбом {group}: {album}")
+    else:
+        print(f"{group} не знайдено в словнику.")
+
+
+def edit_album():
+    global music_groups_albums
+    group = input("Введіть назву музичної групи для редагування альбому: ")
+    if group in music_groups_albums:
+        new_album = input(f"Введіть новий альбом для {group}: ")
+        music_groups_albums[group] = new_album
+        print(f"Альбом для {group} змінено на {new_album}.")
+    else:
+        print(f"{group} не знайдено в словнику.")
+
+
+def display_menu():
+    print("Меню:")
+    print("1. Додати музичну групу та альбом")
+    print("2. Видалити музичну групу")
+    print("3. Пошук альбому за музичною групою")
+    print("4. Редагувати альбом музичної групи")
+    print("5. Зберегти дані")
+    print("6. Завантажити дані")
+    print("0. Вийти")
+
 
 # Приклад використання функцій:
-add_country()
-save_data()
-load_data()
-print(countries_capitals)
+while True:
+    display_menu()
+    choice = input("Введіть номер опції (0-6): ")
 
-search_capital()
-edit_capital()
-remove_country()
-save_data()
-load_data()
-print(countries_capitals)
+    if choice == "1":
+        add_group()
+    elif choice == "2":
+        remove_group()
+    elif choice == "3":
+        search_album()
+    elif choice == "4":
+        edit_album()
+    elif choice == "5":
+        save_data()
+    elif choice == "6":
+        load_data()
+    elif choice == "0":
+        print("Дякую за використання програми. До побачення!")
+        break
+    else:
+        print("Неправильний вибір. Спробуйте ще раз.")
+
