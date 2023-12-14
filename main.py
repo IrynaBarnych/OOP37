@@ -48,6 +48,17 @@ def find_user():
     else:
         print(f"Користувача з логіном {login_to_find} не знайдено.")
 
+# Редагування паролю користувача
+def edit_password():
+    global user_credentials
+    login_to_edit = input("Введіть логін користувача, пароль якого потрібно змінити: ")
+    if login_to_edit in user_credentials:
+        new_password = input("Введіть новий пароль: ")
+        user_credentials[login_to_edit] = new_password
+        print(f"Пароль користувача з логіном {login_to_edit} змінено.")
+    else:
+        print(f"Користувача з логіном {login_to_edit} не знайдено.")
+
 # Додавання користувача
 add_user()
 
