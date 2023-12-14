@@ -59,6 +59,43 @@ def edit_password():
     else:
         print(f"Користувача з логіном {login_to_edit} не знайдено.")
 
+
+# Меню
+def main_menu():
+    while True:
+        print("\nМеню:")
+        print("1. Додати користувача")
+        print("2. Видалити користувача")
+        print("3. Знайти користувача")
+        print("4. Редагувати пароль користувача")
+        print("5. Зберегти дані")
+        print("6. Завантажити дані")
+        print("7. Вийти")
+
+        choice = input("Виберіть опцію: ")
+
+        if choice == '1':
+            add_user()
+        elif choice == '2':
+            remove_user()
+        elif choice == '3':
+            find_user()
+        elif choice == '4':
+            edit_password()
+        elif choice == '5':
+            save_data()
+        elif choice == '6':
+            load_data()
+        elif choice == '7':
+            print("Дякую за використання програми. До побачення!")
+            break
+        else:
+            print("Невірний вибір. Спробуйте ще раз.")
+
+
+# Запуск головного меню
+main_menu()
+
 # Додавання користувача
 add_user()
 
